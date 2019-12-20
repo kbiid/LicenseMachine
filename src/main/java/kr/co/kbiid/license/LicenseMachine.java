@@ -71,7 +71,7 @@ public class LicenseMachine {
 	public static byte[] issueByPrivate(License license, String privateKeyString) throws Exception {
 
 		logger.info("issue start..");
-		PrivateKey privateKey = KeyUtil.getPrivateKeyByFile(privateKeyString);
+		PrivateKey privateKey = KeyUtil.getPrivateKeyByString(privateKeyString);
 		return generateLicense(license, privateKey);
 	}
 

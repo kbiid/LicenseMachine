@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.HostInfoUtil;
 import kr.co.kbiid.license.util.KeyUtil;
 
@@ -24,15 +25,15 @@ public class LicenseMachineTest {
 	private String licenseByteByPublicKeyFile = "BV4nPzYHSzaLrghmX4gkBOo9VbeYRmaU+Rj6fv4bB11ZyCHN17D4h45zxEM+nlQ4l7sJm4yUXj8Shf+TPGz3GUBi253oOAmsXvFa5Y42+YLQ7x32+PIM4h97qazRg6/mh0YEqcqmw0xSAwd4ww6XMCJx1CIjD4ZxvvzHFIh1no0GeoXFI5eCj4nrw5T0SSbFfbkCx7IxZkyDGLOrGnkg7vsV6IXd0fhCDsS1dqlVZz5jlSZznMAMpGB3Gm9ZmwF3IZ+2pKIYywC1GZv6hfV0gbI2YB5LJD2cvfbzxDeMbiABe6zvDFRU/DbtjqF2FJB9aDdG/3D7//OHbwpi3Owb1w==";
 	private String licenseByteByPublicKeyString = "CRv9e6vTzwncPzrXtAF/zMrPgaE8yjjkWTtbNR6vz3Yu/0HeCWaAZui78RFslLcDD5iGsRFMq2hnBM6j+EMxVb/4ydNWoP3wybjTzDTGw/MksrcNpJjnbunwfi73kvU4x7BtH2O2MTnR97+HBmIMYKzH0R7Hzhmgvh01ZukvABg=";
 	private String licenseByteByPrivateKeyFile = "FAM/xrWYAEMEFdxCYl6q6MY/TVMLh2r4eh9h65JlI1sVxcjEEhw/MfKIvbIASFN9yY4IIazlwjp36mh5Wx1XX+RCab+crPtLeQ8BJoK3znC3DO4IxwW4lZQQxSBmTFx8hqAfuM0jQtG0PAeXMj+Cd67/aQbgvSolTZUBAamm/kk7NTcbcYjhGJi0/np4vVvzPaKFxcXcVbvCBmqDbrNx0FceHwsg/5MDYzNVAdO0H4Gry78LokQgD3yOFGXczJQd7hhhxrTfWYxeKZcOAQwOYL9PXAVvEnFHzYkB8pXrwxXtSvYY/kjeFDeKAYVdrNM028R90fCWF3381sqDrpK30g==";
-	private String licenseByteByPrivateKeyString = "CRv9e6vTzwncPzrXtAF/zMrPgaE8yjjkWTtbNR6vz3Yu/0HeCWaAZui78RFslLcDD5iGsRFMq2hnBM6j+EMxVb/4ydNWoP3wybjTzDTGw/MksrcNpJjnbunwfi73kvU4x7BtH2O2MTnR97+HBmIMYKzH0R7Hzhmgvh01ZukvABg=";
+	private String licenseByteByPrivateKeyString = "Y9eAXUzNCrX9Vp8Tv/jryT8JPd7jRTf3zNPwUbVCEpKGpeimXtOZcZL9ELmUlBO2+JIS9vriFsMTMqbJhhVyzcZEKyv5swTT2RWODgXoc+VzHF9H6cRIg+azaEBxc2KFQoREfarbKS1jKGHzxfTphaGoVKHsJAvGuhU7Si6A6uY=";
 
 	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\public_key.der";
 	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\private_key.der";
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license";
+	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_test";
 
 	@BeforeClass
 	public static void setUp() {
-		license = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-22", LocalDate.now().plusYears(1));
+		license = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-92", LocalDate.now().plusYears(1));
 	}
 
 	@Test
@@ -63,6 +64,7 @@ public class LicenseMachineTest {
 	public void testIssueByPrivateLicenseFile() throws Exception {
 		File file = new File(privateKeyPath);
 		byte[] licenseByte = LicenseMachine.issueByPrivate(license, file);
+		FileUtil.makeFile(licensePath, licenseByte);
 		logger.info(KeyUtil.toStringByBase64(licenseByte));
 	}
 

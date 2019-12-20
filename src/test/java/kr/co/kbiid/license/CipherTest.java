@@ -37,7 +37,7 @@ public class CipherTest {
 	
 	@Test
 	public void cipherWithKeyFileSuccess() {
-		logger.info("byFile start..");
+		logger.info("cipherWithKeyFileSuccess start..");
 		logger.info("license info : " + license.toString());
 		File file = new File(publicKeyPath);
 		try {
@@ -56,7 +56,7 @@ public class CipherTest {
 
 	@Test
 	public void cipherWithKeyFileLicenseModulated() {
-		logger.info("byFile start..");
+		logger.info("cipherWithKeyFileLicenseModulated start..");
 		logger.info("license info : " + license.toString());
 		try {
 			boolean result = LicenseMachine.verify(modulatedLicensePath, privateKeyPath);
@@ -73,7 +73,7 @@ public class CipherTest {
 
 	@Test
 	public void cipherWithKeyFileHostInfoDifferent() {
-		logger.info("byFile start..");
+		logger.info("cipherWithKeyFileHostInfoDifferent start..");
 		logger.info("license info : " + license2.toString());
 		File file = new File(publicKeyPath);
 		try {
