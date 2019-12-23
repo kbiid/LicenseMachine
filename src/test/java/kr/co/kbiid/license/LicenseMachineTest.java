@@ -22,14 +22,12 @@ public class LicenseMachineTest {
 	private String publicKeyString = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCNTWeBhNN1Q7rSpK+Q4j7l5mh2MkYi29zg8fh0l2kmHQ+pDW1SNogWbHm11Zrb0WGKAJblRpiiS85mFcD0G8z1MPzYYGGywlqdXNS8YbxTgKcisN0H3dH1rvcRSkIpPGCV4iEfIrHnTlATdBaXCSV39kFT+X6H/bsKz2gza5/BWwIDAQAB";
 	private String privateKeyString = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAI1NZ4GE03VDutKkr5DiPuXmaHYyRiLb3ODx+HSXaSYdD6kNbVI2iBZsebXVmtvRYYoAluVGmKJLzmYVwPQbzPUw/NhgYbLCWp1c1LxhvFOApyKw3Qfd0fWu9xFKQik8YJXiIR8isedOUBN0FpcJJXf2QVP5fof9uwrPaDNrn8FbAgMBAAECgYAJ7/SkjjPU3mOIJt7WAKNNxct47IY0M2QwSbQgdvmFHawZRoF2s7EUaqKQoCoY5XvHmc0C6NkZKN2mHkeIo1/hj3nbrtM85u5wR6Ws9GObnhcPL5MH4D/PIuZC6/vmJrlXRragesnpV+TQlZAe+PCukNiPUZDqxwojPJraf6+JYQJBANyGitdsT4udrCQp5sqsCOFt7goH6THmnOzDLiUbjbGzf801i7SGkXQZ0Z/m6Vs5pxYkVmJ7C642De5r8N/lfwsCQQCkCF+armsJOqAfgjLYEubTuuJpgBz9XRQRRkg4fWohAUpKIuLyEDkJP54QzPKpOBrGR047aMchT990gQDO0njxAkAD3Ar0CD5AKEtJ+r3CUE57e4wN+uN27x1R+3yEQ74wHP8gnU5Lo4tKJ+WGUelFonWtKoekg5jJvMJzqMn3cTHPAkBDfaKAjWVC7dk2PabX2qcY1NsVl33WDXcVSHqsq4WAQPylFkeUW3JsSL2roffyAkCZ9nrM3OaZ4ThKwk1ny5exAkBrbSPRMEx4PsWpmFdGUCDoAqZRdJHwvBuczWPS6KYr400lOcn9ViObmxzNJ4AvJBcftFpH+XaFEh/o9qisWS1M";
 
-	private String licenseByteByPublicKeyFile = "BV4nPzYHSzaLrghmX4gkBOo9VbeYRmaU+Rj6fv4bB11ZyCHN17D4h45zxEM+nlQ4l7sJm4yUXj8Shf+TPGz3GUBi253oOAmsXvFa5Y42+YLQ7x32+PIM4h97qazRg6/mh0YEqcqmw0xSAwd4ww6XMCJx1CIjD4ZxvvzHFIh1no0GeoXFI5eCj4nrw5T0SSbFfbkCx7IxZkyDGLOrGnkg7vsV6IXd0fhCDsS1dqlVZz5jlSZznMAMpGB3Gm9ZmwF3IZ+2pKIYywC1GZv6hfV0gbI2YB5LJD2cvfbzxDeMbiABe6zvDFRU/DbtjqF2FJB9aDdG/3D7//OHbwpi3Owb1w==";
 	private String licenseByteByPublicKeyString = "CRv9e6vTzwncPzrXtAF/zMrPgaE8yjjkWTtbNR6vz3Yu/0HeCWaAZui78RFslLcDD5iGsRFMq2hnBM6j+EMxVb/4ydNWoP3wybjTzDTGw/MksrcNpJjnbunwfi73kvU4x7BtH2O2MTnR97+HBmIMYKzH0R7Hzhmgvh01ZukvABg=";
-	private String licenseByteByPrivateKeyFile = "FAM/xrWYAEMEFdxCYl6q6MY/TVMLh2r4eh9h65JlI1sVxcjEEhw/MfKIvbIASFN9yY4IIazlwjp36mh5Wx1XX+RCab+crPtLeQ8BJoK3znC3DO4IxwW4lZQQxSBmTFx8hqAfuM0jQtG0PAeXMj+Cd67/aQbgvSolTZUBAamm/kk7NTcbcYjhGJi0/np4vVvzPaKFxcXcVbvCBmqDbrNx0FceHwsg/5MDYzNVAdO0H4Gry78LokQgD3yOFGXczJQd7hhhxrTfWYxeKZcOAQwOYL9PXAVvEnFHzYkB8pXrwxXtSvYY/kjeFDeKAYVdrNM028R90fCWF3381sqDrpK30g==";
 	private String licenseByteByPrivateKeyString = "Y9eAXUzNCrX9Vp8Tv/jryT8JPd7jRTf3zNPwUbVCEpKGpeimXtOZcZL9ELmUlBO2+JIS9vriFsMTMqbJhhVyzcZEKyv5swTT2RWODgXoc+VzHF9H6cRIg+azaEBxc2KFQoREfarbKS1jKGHzxfTphaGoVKHsJAvGuhU7Si6A6uY=";
 
 	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\public_key.der";
 	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\private_key.der";
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_test";
+	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_test_keytool";
 
 	@BeforeClass
 	public static void setUp() {
@@ -40,6 +38,7 @@ public class LicenseMachineTest {
 	public void testIssueLicenseFile() throws Exception {
 		File file = new File(publicKeyPath);
 		byte[] licenseByte = LicenseMachine.issue(license, file);
+		FileUtil.makeFile(licensePath, licenseByte);
 		logger.info(KeyUtil.toStringByBase64(licenseByte));
 	}
 
