@@ -1,4 +1,4 @@
-package kr.co.kbiid.license;
+package kr.co.kbiid.license.util;
 
 import java.util.List;
 
