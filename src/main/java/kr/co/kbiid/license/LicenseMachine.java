@@ -2,7 +2,6 @@ package kr.co.kbiid.license;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.SocketException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -83,16 +82,17 @@ public class LicenseMachine {
 		return verifyLicense(FileUtil.readFile(licenseFullPath), privateKey);
 	}
 
-	private static boolean verifyLicense(byte[] encrypted, PrivateKey privateKey)
-			throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException,
-			BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, SocketException {
-
+	private static boolean verifyLicense(byte[] encrypted, PrivateKey privateKey) {
 		logger.info("verifyLicense..");
 
-		String plainText = CipherUtil.decryptRSA(encrypted, privateKey);
-		String[] result = plainText.split("\\|");
-
-		return checkResult(result);
+		try {
+			String plainText = CipherUtil.decryptRSA(encrypted, privateKey);
+			String[] result = plainText.split("\\|");
+			return checkResult(result);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return false;
+		}
 	}
 
 	/**
@@ -124,16 +124,17 @@ public class LicenseMachine {
 		return verifyLicense(FileUtil.readFile(licenseFullPath), publicKey);
 	}
 
-	private static boolean verifyLicense(byte[] encrypted, PublicKey publicKey)
-			throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException,
-			BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, SocketException {
-
+	private static boolean verifyLicense(byte[] encrypted, PublicKey publicKey) {
 		logger.info("verifyLicense..");
 
-		String plainText = CipherUtil.decryptRSA(encrypted, publicKey);
-		String[] result = plainText.split("\\|");
-
-		return checkResult(result);
+		try {
+			String plainText = CipherUtil.decryptRSA(encrypted, publicKey);
+			String[] result = plainText.split("\\|");
+			return checkResult(result);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return false;
+		}
 	}
 
 	public static boolean verifyByPublic(byte[] encrypted, String publicKeyString) throws Exception {

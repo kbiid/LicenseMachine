@@ -2,6 +2,8 @@ package kr.co.kbiid.license;
 
 import java.time.LocalDate;
 
+import javax.crypto.BadPaddingException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -30,7 +32,7 @@ public class Cipher_JavaCode_Test {
 	private String differentMacAddressLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_different_mac";
 	private String differentHostPath = "D:\\eclipse_workspace\\license-machine\\file\\license_different_host";
 
-	private String modulatedLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_modulate";
+	private String modulatedLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_modulated";
 	private String overLengthLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_over_length";
 
 	@Test
@@ -42,6 +44,61 @@ public class Cipher_JavaCode_Test {
 			boolean result = LicenseMachine.verify(licenseByte, privateKey);
 			if (result) {
 				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void verifyOverLengthLicense() {
+		try {
+			byte[] licenseByte = FileUtil.readFile(overLengthLicensePath);
+			boolean result = LicenseMachine.verify(licenseByte, privateKey);
+			if (result) {
+				logger.info("일치합니다.");
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void verifyModulatedLicense() {
+		try {
+			byte[] licenseByte = FileUtil.readFile(modulatedLicensePath);
+			boolean result = LicenseMachine.verify(licenseByte, privateKey);
+			if (result) {
+				logger.info("일치합니다.");
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch(BadPaddingException e) {
+			Assert.fail("잘못된 라이센스 파일입니다.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void differentDateLicense() {
+		try {
+			byte[] encrypted = LicenseMachine.issue(license_differentDate, publicKey);
+			FileUtil.makeFile(differentDateLicensePath, encrypted);
+			byte[] licenseByte = FileUtil.readFile(differentDateLicensePath);
+			boolean result = LicenseMachine.verify(licenseByte, privateKey);
+			if (result) {
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
 			} else {
 				Assert.fail("일치하지 않습니다.");
 			}
@@ -51,33 +108,57 @@ public class Cipher_JavaCode_Test {
 	}
 
 	@Test
-	public void verifyOverLengthLicense() {
-
-	}
-
-	@Test
-	public void verifyModulatedLicense() {
-
-	}
-
-	@Test
-	public void differentDateLicense() {
-
-	}
-
-	@Test
 	public void differentMacAddressLicense() {
-
+		try {
+			byte[] encrypted = LicenseMachine.issue(license_differentMacAddress, publicKey);
+			FileUtil.makeFile(differentMacAddressLicensePath, encrypted);
+			byte[] licenseByte = FileUtil.readFile(differentMacAddressLicensePath);
+			boolean result = LicenseMachine.verify(licenseByte, privateKey);
+			if (result) {
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
 	public void differentHostNameLicense() {
-
+		try {
+			byte[] encrypted = LicenseMachine.issue(license_differentHost, publicKey);
+			FileUtil.makeFile(differentHostPath, encrypted);
+			byte[] licenseByte = FileUtil.readFile(differentHostPath);
+			boolean result = LicenseMachine.verify(licenseByte, privateKey);
+			if (result) {
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
 	public void encryptByPrivateAndDecryptByPublic() {
-
+		try {
+			byte[] encrypted = LicenseMachine.issueByPrivate(license, privateKey);
+			FileUtil.makeFile(licensePath, encrypted);
+			byte[] licenseByte = FileUtil.readFile(licensePath);
+			boolean result = LicenseMachine.verifyByPublic(licenseByte, publicKey);
+			if (result) {
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 
 }

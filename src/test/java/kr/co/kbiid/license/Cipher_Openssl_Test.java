@@ -15,71 +15,143 @@ public class Cipher_Openssl_Test {
 
 	private static Log logger = LogFactory.getLog(Cipher_Openssl_Test.class);
 
-	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\public_key.pem";
-	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\private_key.pem";
+	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\public_key.der";
+	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\private_key.der";
 
 	private License license = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-92",
 			LocalDate.now().plusYears(1));
-	private License license2 = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-92",
+	private License license_differentDate = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-92",
 			LocalDate.now().minusMonths(1));
-	
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license";
-	private String licensePath2 = "D:\\eclipse_workspace\\license-machine\\file\\license2";
-	
-	private String modulatedLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_modulate";
-	
+	private License license_differentMacAddress = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-22",
+			LocalDate.now().plusYears(1));
+	private License license_differentHost = new License("kbiid", "D8-C4-97-D6-5F-92", LocalDate.now().plusYears(1));
+
+	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license";
+	private String differentDateLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_different_date";
+	private String differentMacAddressLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_different_mac";
+	private String differentHostPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_different_host";
+
+	private String modulatedLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_modulated";
+	private String overLengthLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_over_length";
+
 	@Test
-	public void cipherWithKeyFileSuccess() {
-		logger.info("cipherWithKeyFileSuccess start..");
-		logger.info("license info : " + license.toString());
-		File file = new File(publicKeyPath);
+	public void cipher() {
 		try {
+			File file = new File(publicKeyPath);
 			byte[] encrypted = LicenseMachine.issue(license, file);
 			FileUtil.makeFile(licensePath, encrypted);
 			boolean result = LicenseMachine.verify(licensePath, privateKeyPath);
 			if (result) {
-				logger.info("올바른 라이센스 파일입니다.");
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
 			} else {
-				Assert.fail("잘못된 라이센스 파일입니다.");
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void verifyOverLengthLicense() {
+		try {
+			boolean result = LicenseMachine.verify(overLengthLicensePath, privateKeyPath);
+			if (result) {
+				logger.info("일치합니다.");
+			} else {
+				Assert.fail("일치하지 않습니다.");
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+			Assert.fail(e.getMessage());
 		}
 	}
 
 	@Test
-	public void cipherWithKeyFileLicenseModulated() {
-		logger.info("cipherWithKeyFileLicenseModulated start..");
-		logger.info("license info : " + license.toString());
+	public void verifyModulatedLicense() {
 		try {
 			boolean result = LicenseMachine.verify(modulatedLicensePath, privateKeyPath);
 			if (result) {
-				logger.info("올바른 라이센스 파일입니다.");
+				logger.info("일치합니다.");
 			} else {
-				throw new Exception();
+				Assert.fail("일치하지 않습니다.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			Assert.fail("잘못된 라이센스 파일입니다.");
+			logger.error(e.getMessage());
+			Assert.fail(e.getMessage());
 		}
 	}
 
 	@Test
-	public void cipherWithKeyFileHostInfoDifferent() {
-		logger.info("cipherWithKeyFileHostInfoDifferent start..");
-		logger.info("license info : " + license2.toString());
-		File file = new File(publicKeyPath);
+	public void differentDateLicense() {
 		try {
-			byte[] encrypted = LicenseMachine.issue(license2, file);
-			FileUtil.makeFile(licensePath2, encrypted);
-			boolean result = LicenseMachine.verify(licensePath2, privateKeyPath);
+			File file = new File(publicKeyPath);
+			byte[] encrypted = LicenseMachine.issue(license_differentDate, file);
+			FileUtil.makeFile(differentDateLicensePath, encrypted);
+			boolean result = LicenseMachine.verify(differentDateLicensePath, privateKeyPath);
 			if (result) {
-				logger.info("올바른 라이센스 파일입니다.");
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
 			} else {
-				Assert.fail("라이센스 정보가 올바르지 않습니다.");
+				Assert.fail("일치하지 않습니다.");
 			}
 		} catch (Exception e) {
-			Assert.fail("잘못된 라이센스 파일입니다.");
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void differentMacAddressLicense() {
+		try {
+			File file = new File(publicKeyPath);
+			byte[] encrypted = LicenseMachine.issue(license_differentMacAddress, file);
+			FileUtil.makeFile(differentMacAddressLicensePath, encrypted);
+			boolean result = LicenseMachine.verify(differentMacAddressLicensePath, privateKeyPath);
+			if (result) {
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void differentHostNameLicense() {
+		try {
+			File file = new File(publicKeyPath);
+			byte[] encrypted = LicenseMachine.issue(license_differentHost, file);
+			FileUtil.makeFile(differentHostPath, encrypted);
+			boolean result = LicenseMachine.verify(differentHostPath, privateKeyPath);
+			if (result) {
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void encryptByPrivateAndDecryptByPublic() {
+		try {
+			File file = new File(privateKeyPath);
+			byte[] encrypted = LicenseMachine.issueByPrivate(license, file);
+			FileUtil.makeFile(licensePath, encrypted);
+			boolean result = LicenseMachine.verifyByPublic(licensePath, publicKeyPath);
+			if (result) {
+				logger.info("일치합니다.");
+				Assert.assertTrue("일치합니다.", result);
+			} else {
+				Assert.fail("일치하지 않습니다.");
+			}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
 		}
 	}
 
