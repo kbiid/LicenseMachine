@@ -32,7 +32,6 @@ public class CipherUtil {
 
 		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 		byte[] bytePlain = cipher.doFinal(plainText.getBytes());
-		// String encrypted = Base64.getEncoder().encodeToString(bytePlain);
 
 		return bytePlain;
 	}
@@ -51,7 +50,6 @@ public class CipherUtil {
 
 		cipher.init(Cipher.ENCRYPT_MODE, privateKey);
 		byte[] bytePlain = cipher.doFinal(plainText.getBytes());
-		// String encrypted = Base64.getEncoder().encodeToString(bytePlain);
 
 		return bytePlain;
 	}
@@ -70,9 +68,6 @@ public class CipherUtil {
 		Cipher cipher = Cipher.getInstance("RSA");
 
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
-		if (encrypted.length > 256) {
-			throw new IllegalBlockSizeException("라이센스 파일의 길이가 265바이트를 초과합니다.");
-		}
 		byte[] bytePlain = cipher.doFinal(encrypted);
 		String decrypted = new String(bytePlain, "utf-8");
 

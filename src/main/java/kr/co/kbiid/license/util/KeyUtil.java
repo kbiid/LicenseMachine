@@ -41,6 +41,9 @@ public class KeyUtil {
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 
 		logger.info("getPrivateKey..");
+		if (Paths.get(fileFullPath).getFileName().toString().contains(".pem")) {
+			return PEMUtil.readPrivateKeyFromFile(fileFullPath, "RSA");
+		}
 		byte[] keyBytes = Files.readAllBytes(Paths.get(fileFullPath));
 		return generatePrivateKey(keyBytes);
 	}
@@ -73,6 +76,9 @@ public class KeyUtil {
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 
 		logger.info("getPublicKey..");
+		if (Paths.get(fileFullPath).getFileName().toString().contains(".pem")) {
+			return PEMUtil.readPublicKeyFromFile(fileFullPath, "RSA");
+		}
 		byte[] keyBytes = Files.readAllBytes(Paths.get(fileFullPath));
 		return generatePublicKey(keyBytes);
 	}
@@ -85,7 +91,8 @@ public class KeyUtil {
 		return keyFactory.generatePublic(keySpec);
 	}
 
-	public static PublicKey getPublicKeyByString(String publicKeyString) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public static PublicKey getPublicKeyByString(String publicKeyString)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		logger.info("getPublicKeyByHexString..");
 		return generatePublicKey(toByteByBase64(publicKeyString));
 	}
