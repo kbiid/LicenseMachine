@@ -40,13 +40,13 @@ public class Cipher_JavaCode_Test {
 			LocalDate.now().plusYears(1));
 	private License license_differentHost = new License("kbiid", "D8-C4-97-D6-5F-92", LocalDate.now().plusYears(1));
 
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license";
-	private String differentDateLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_different_date";
-	private String differentMacAddressLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_different_mac";
-	private String differentHostPath = "D:\\eclipse_workspace\\license-machine\\file\\license_different_host";
+	private String licensePath = "./file/javacode/license";
+	private String differentDateLicensePath = "./file/javacode/license_different_date";
+	private String differentMacAddressLicensePath = "./file/javacode/license_different_mac";
+	private String differentHostPath = "./file/javacode/license_different_host";
 
-	private String modulatedLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_modulated";
-	private String overLengthLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_over_length";
+	private String modulatedLicensePath = "./file/javacode/license_modulated";
+	private String overLengthLicensePath = "./file/javacode/license_over_length";
 
 	@Test
 	public void cipher() {

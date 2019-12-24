@@ -29,8 +29,8 @@ public class Cipher_JavaKeyTool_Test {
 
 	private static Log logger = LogFactory.getLog(Cipher_JavaKeyTool_Test.class);
 	
-	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\keytool\\public.pem";
-	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\keytool\\private.pem";
+	private String publicKeyPath = "./file/keytool/public.pem";
+	private String privateKeyPath = "./file/keytool/private.pem";
 
 	private License license = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-92",
 			LocalDate.now().plusYears(1));
@@ -40,13 +40,13 @@ public class Cipher_JavaKeyTool_Test {
 			LocalDate.now().plusYears(1));
 	private License license_differentHost = new License("kbiid", "D8-C4-97-D6-5F-92", LocalDate.now().plusYears(1));
 
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\keytool\\license";
-	private String differentDateLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\keytool\\license_different_date";
-	private String differentMacAddressLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\keytool\\license_different_mac";
-	private String differentHostPath = "D:\\eclipse_workspace\\license-machine\\file\\keytool\\license_different_host";
+	private String licensePath = "./file/keytool/license";
+	private String differentDateLicensePath = "./file/keytool/license_different_date";
+	private String differentMacAddressLicensePath = "./file/keytool/license_different_mac";
+	private String differentHostPath = "./file/keytool/license_different_host";
 
-	private String modulatedLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\keytool\\license_modulated";
-	private String overLengthLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\keytool\\license_over_length";
+	private String modulatedLicensePath = "./file/keytool/license_modulated";
+	private String overLengthLicensePath = "./file/keytool/license_over_length";
 
 	@Test
 	public void cipher() {

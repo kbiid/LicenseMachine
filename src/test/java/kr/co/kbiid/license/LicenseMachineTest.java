@@ -39,9 +39,9 @@ public class LicenseMachineTest {
 	private String licenseByteByPublicKey = "rLcH2CufRoNfZRmJxWkMQm+baU2wQkKuBuyCAn2MMcghwGeA8N293b6PsaNRasfbyO8F9kqPPRC4TQzP0PfJYVmefu8E3Ft6mqIIQa4yAYgtti7w81D7FgqkmD8Ll6iTMfnieHuWHgOMqNSuihFVTF4/stw9XMGFk5iQpiDVLVY=";
 	private String licenseByteByPrivateKey = "ENzMvA5wrGNPacXiZn6m+eeoTQ41+UGh2/TfhL79DU0qyRzm0HBPfZTmahWjwYXss65YttzzvLItrvXJ2MCOq5JDO2K40DQuulcfeW6GJtGi3vxZS+zBMlyLtsiJsCLt9fyHIRTLZWWcKCyr1NfINHXOUbisuEu7Yi2FMHbH1p0=";
 
-	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\public_key.der";
-	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\private_key.der";
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license";
+	private String publicKeyPath = "./file/openssl/public_key.der";
+	private String privateKeyPath = "./file/openssl/private_key.der";
+	private String licensePath = "./file/license";
 
 	@BeforeClass
 	public static void setUp() {

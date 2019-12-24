@@ -21,7 +21,7 @@ public class FileUtilTest {
 
 	private static Log logger = LogFactory.getLog(FileUtilTest.class);
 
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_test";
+	private String licensePath = "./file/license_test";
 	private String data = "L/EWPezFfnX+Q/IR5Cs4CA/iVj8h5WP+aPuZTYK5tF8tAT296uyKbc6BpF+xV61bLzybav/u3OnnqofJcDsg3UgTWCkSCfFdBgMjwGkGlSjJNK/IZD2uO+vwBupC1IcrCSjG3a8/22vWTTNrwi7OhkOILp7ATNt0TJhPjQsOtrA=";
 
 	@Test

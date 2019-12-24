@@ -30,8 +30,8 @@ public class Cipher_Openssl_Test {
 
 	private static Log logger = LogFactory.getLog(Cipher_Openssl_Test.class);
 
-	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\public_key.der";
-	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\private_key.der";
+	private String publicKeyPath = "./file/openssl/public_key.der";
+	private String privateKeyPath = "./file/openssl/private_key.der";
 
 	private License license = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-92",
 			LocalDate.now().plusYears(1));
@@ -41,13 +41,13 @@ public class Cipher_Openssl_Test {
 			LocalDate.now().plusYears(1));
 	private License license_differentHost = new License("kbiid", "D8-C4-97-D6-5F-92", LocalDate.now().plusYears(1));
 
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license";
-	private String differentDateLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_different_date";
-	private String differentMacAddressLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_different_mac";
-	private String differentHostPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_different_host";
+	private String licensePath = "./file/openssl/license";
+	private String differentDateLicensePath = "./file/openssl/license_different_date";
+	private String differentMacAddressLicensePath = "./file/openssl/license_different_mac";
+	private String differentHostPath = "./file/openssl/license_different_host";
 
-	private String modulatedLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_modulated";
-	private String overLengthLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\license_over_length";
+	private String modulatedLicensePath = "./file/openssl/license_modulated";
+	private String overLengthLicensePath = "./file/openssl/license_over_length";
 
 	@Test
 	public void cipher() {

@@ -40,8 +40,8 @@ public class BouncyCastleTest {
 	private String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCIN4f9XBXl8nybTkEUO/fk89yHBOW/wM6hLULp1qkMscJWSpFKiDLgongKJtaazFjIYi79mQhqrXM/wyib1XBBWDlS26vvOTsxbfkEAamWYY0a4hR6mQySv2//sNPfwKdcJlju1vWJh9tKOaDitXGWl0a7ALPHjL4dSVx+N2NlQIDAQAB";
 	private String privateKey = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAMIg3h/1cFeXyfJtOQRQ79+Tz3IcE5b/AzqEtQunWqQyxwlZKkUqIMuCieAom1prMWMhiLv2ZCGqtcz/DKJvVcEFYOVLbq+85OzFt+QQBqZZhjRriFHqZDJK/b/+w09/Ap1wmWO7W9YmH20o5oOK1cZaXRrsAs8eMvh1JXH43Y2VAgMBAAECgYAisf8hFRuz/APy2QSEufZ1LhS4Xz49EWzBS7CT2aBAknayPAZrACGGXdlIf9lsKpZUEk0+0sWIotsFPVxDt8RKgHFs6oGIlS805hsDGTsoKLLLCOWlDdgpdDnUeXPyt5pBvHGWbccF+9quuppMTi7G1eY5MzJ2+gmPcWLtYsL2wQJBAOaLR4mgqOPCyaFBFx2buw8SFHDHLT5HYNbE0wFiKeY39W6ZpEDvCN7Q6gCLFgDUftGlWbjviVqomT8ZhL6wpKUCQQDXkDy9UIFmuLOrcvMO//Jw4Kr9pX8Ug6T367b/xj/P5C0/tqRplgF5Nhu06bDjkb9gveThmm0z+mrcj07z1cIxAkEAiPQsZyG9sq/AP77/EGO219kRs31e7yRP7sW145iA83ZCopU68igNyO+qUvBM/ek9/SSRDD+gBO8rOkTair080QJBAKklfBPNNQzGh+1TkJfHjJS4JlRL5XDSb8M+SeVfybi2Qi9JgK99ToCvTYRjDzMyrWoa95tzUpdDu1CAfyJkLDECQCL6A486Pzn5AxdHoPXBZ57LFh+h0MOqPzBURZosXZ9UFGjTqBPNaGVOrdNxZ1nbLg5RxLHj4s4PJ3js+OaT/lw=";
 
-	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\bouncycastle\\public.pem";
-	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\bouncycastle\\private.pem";
+	private String publicKeyPath = "./file/bouncycastle/public.pem";
+	private String privateKeyPath = "./file/bouncycastle/private.pem";
 	
 	private License license = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-92",
 			LocalDate.now().plusYears(1));
@@ -51,13 +51,13 @@ public class BouncyCastleTest {
 			LocalDate.now().plusYears(1));
 	private License license_differentHost = new License("kbiid", "D8-C4-97-D6-5F-92", LocalDate.now().plusYears(1));
 
-	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\bouncycastle\\license";
-	private String differentDateLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\bouncycastle\\license_different_date";
-	private String differentMacAddressLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\bouncycastle\\license_different_mac";
-	private String differentHostPath = "D:\\eclipse_workspace\\license-machine\\file\\bouncycastle\\license_different_host";
+	private String licensePath = "./file/bouncycastle/license";
+	private String differentDateLicensePath = "./file/bouncycastle/license_different_date";
+	private String differentMacAddressLicensePath = "./file/bouncycastle/license_different_mac";
+	private String differentHostPath = "./file/bouncycastle/license_different_host";
 
-	private String modulatedLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\bouncycastle\\license_modulated";
-	private String overLengthLicensePath = "D:\\eclipse_workspace\\license-machine\\file\\bouncycastle\\license_over_length";
+	private String modulatedLicensePath = "./file/bouncycastle/license_modulated";
+	private String overLengthLicensePath = "./file/bouncycastle/license_over_length";
 
 	@Test
 	public void genKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException {
