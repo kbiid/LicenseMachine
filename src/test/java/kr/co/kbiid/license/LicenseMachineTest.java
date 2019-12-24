@@ -13,20 +13,34 @@ import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.HostInfoUtil;
 import kr.co.kbiid.license.util.KeyUtil;
 
+/**
+ *
+ * 선행 작업 
+ * 1. keyUtilTest.java에서 genRSAKeyPair로 publicKey와 privateKey를 생성한 후 값을 확인하여 아래의 publicKey,privateKey 변수에 값을 저장한다.
+ * 2. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
+ * 3. publicKeyPath, privateKeyPath는 키를 생성하여 키가 있는 경로를 저장한다.
+ * 4. licensePath는 라이선스를 저장할 위치를 저장한다.
+ *
+ * 사용법
+ * - 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다.
+ * - 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다.
+ * - licenseByteByPublicKey,licenseByteByPrivateKey의 변수값은 testIssueLicenseString,testIssueByPrivateLicenseFile에서 확인할 수 있다.
+ * - license_modulated,license_over_length 같은 경우 정상적으로 생성된 license파일을 복사하여 이름을 수정하여 생성한 후 내용을 직접 수정한다.
+ */
 public class LicenseMachineTest {
 
 	private static Log logger = LogFactory.getLog(LicenseMachineTest.class);
 
 	private static License license;
 
-	private String publicKeyString = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCNTWeBhNN1Q7rSpK+Q4j7l5mh2MkYi29zg8fh0l2kmHQ+pDW1SNogWbHm11Zrb0WGKAJblRpiiS85mFcD0G8z1MPzYYGGywlqdXNS8YbxTgKcisN0H3dH1rvcRSkIpPGCV4iEfIrHnTlATdBaXCSV39kFT+X6H/bsKz2gza5/BWwIDAQAB";
-	private String privateKeyString = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAI1NZ4GE03VDutKkr5DiPuXmaHYyRiLb3ODx+HSXaSYdD6kNbVI2iBZsebXVmtvRYYoAluVGmKJLzmYVwPQbzPUw/NhgYbLCWp1c1LxhvFOApyKw3Qfd0fWu9xFKQik8YJXiIR8isedOUBN0FpcJJXf2QVP5fof9uwrPaDNrn8FbAgMBAAECgYAJ7/SkjjPU3mOIJt7WAKNNxct47IY0M2QwSbQgdvmFHawZRoF2s7EUaqKQoCoY5XvHmc0C6NkZKN2mHkeIo1/hj3nbrtM85u5wR6Ws9GObnhcPL5MH4D/PIuZC6/vmJrlXRragesnpV+TQlZAe+PCukNiPUZDqxwojPJraf6+JYQJBANyGitdsT4udrCQp5sqsCOFt7goH6THmnOzDLiUbjbGzf801i7SGkXQZ0Z/m6Vs5pxYkVmJ7C642De5r8N/lfwsCQQCkCF+armsJOqAfgjLYEubTuuJpgBz9XRQRRkg4fWohAUpKIuLyEDkJP54QzPKpOBrGR047aMchT990gQDO0njxAkAD3Ar0CD5AKEtJ+r3CUE57e4wN+uN27x1R+3yEQ74wHP8gnU5Lo4tKJ+WGUelFonWtKoekg5jJvMJzqMn3cTHPAkBDfaKAjWVC7dk2PabX2qcY1NsVl33WDXcVSHqsq4WAQPylFkeUW3JsSL2roffyAkCZ9nrM3OaZ4ThKwk1ny5exAkBrbSPRMEx4PsWpmFdGUCDoAqZRdJHwvBuczWPS6KYr400lOcn9ViObmxzNJ4AvJBcftFpH+XaFEh/o9qisWS1M";
+	private String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBRkxnQcVf05n2tLgc+Yw88KvxZFu7WrLHRmQuEt/fPl+amwkfwcMSugEqFrMWwZ4kH8zwFhnQvCLdrBwCKuosLzcvq3E498glCjabdIea68LgQkN2Trg3HXbxO57lsOsCUjawu78I3fuTUiJaSXKTPGPVAQJlhZzpN3gld4PmiQIDAQAB";
+	private String privateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAMFGTGdBxV/Tmfa0uBz5jDzwq/FkW7tassdGZC4S398+X5qbCR/BwxK6ASoWsxbBniQfzPAWGdC8It2sHAIq6iwvNy+rcTj3yCUKNpt0h5rrwuBCQ3ZOuDcddvE7nuWw6wJSNrC7vwjd+5NSIlpJcpM8Y9UBAmWFnOk3eCV3g+aJAgMBAAECgYAn47BlJ0frLSr7pfTR1hdBhJKYMZRVKLT5N+f5MmAOHTtyF0lcyorOVKFk5GZ17eQLpJyReJ4/XHT9t0XYlK7br9XO99DKVz2tLM4q3yEgDMzXHIJHAv0GSRnHQLmvyNH1mEZn3QInfxNKqgBlxsIClmkQXaBY3SmOZaqQHeTGuQJBAOJ9MI+sHL8wIG5vCxVrYUUkmn9KuzOXRS3fRoMfT23FiW03519mkhm55GYLuK+nqEhss5M4HQv3AqaxhpNHLX8CQQDadTPOl5uiPcS9yLSl5T2DZek5KQpYo6CgD+GiynNaKnYDZCeDJQMaNLRi7UMZBUyueUrdZ74OU6eEYTduO3/3AkEAnDTbmTuLWBFJTOEpM8yreZSVOdXA5wQdolWrvCOMFJl4/urfmNyVR0j+TaMn7X4kgk72S0MYRXhHS9CEkG824QJBAMvyn2tAHwxYnlSQDBbU7Zi+i/3RUtdt64eDTCOu3gJPod2Io1rMMxlEGyRAXWP+jphUpJAPSmAVuU7dc+J1qgECQQCjKsr5cmK8QkPwb/FSeuoGfwIB8HPD8K6q7fozmIibOFtFhkys/sqVZUptstYK18dmUlviKasHGhOeuKwV3IoQ";
 
-	private String licenseByteByPublicKeyString = "CRv9e6vTzwncPzrXtAF/zMrPgaE8yjjkWTtbNR6vz3Yu/0HeCWaAZui78RFslLcDD5iGsRFMq2hnBM6j+EMxVb/4ydNWoP3wybjTzDTGw/MksrcNpJjnbunwfi73kvU4x7BtH2O2MTnR97+HBmIMYKzH0R7Hzhmgvh01ZukvABg=";
-	private String licenseByteByPrivateKeyString = "Y9eAXUzNCrX9Vp8Tv/jryT8JPd7jRTf3zNPwUbVCEpKGpeimXtOZcZL9ELmUlBO2+JIS9vriFsMTMqbJhhVyzcZEKyv5swTT2RWODgXoc+VzHF9H6cRIg+azaEBxc2KFQoREfarbKS1jKGHzxfTphaGoVKHsJAvGuhU7Si6A6uY=";
+	private String licenseByteByPublicKey = "rLcH2CufRoNfZRmJxWkMQm+baU2wQkKuBuyCAn2MMcghwGeA8N293b6PsaNRasfbyO8F9kqPPRC4TQzP0PfJYVmefu8E3Ft6mqIIQa4yAYgtti7w81D7FgqkmD8Ll6iTMfnieHuWHgOMqNSuihFVTF4/stw9XMGFk5iQpiDVLVY=";
+	private String licenseByteByPrivateKey = "ENzMvA5wrGNPacXiZn6m+eeoTQ41+UGh2/TfhL79DU0qyRzm0HBPfZTmahWjwYXss65YttzzvLItrvXJ2MCOq5JDO2K40DQuulcfeW6GJtGi3vxZS+zBMlyLtsiJsCLt9fyHIRTLZWWcKCyr1NfINHXOUbisuEu7Yi2FMHbH1p0=";
 
 	private String publicKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\public_key.der";
-	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\private_key.der";
+	private String privateKeyPath = "D:\\eclipse_workspace\\license-machine\\file\\openssl\\private_key.der";
 	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license";
 
 	@BeforeClass
@@ -43,20 +57,20 @@ public class LicenseMachineTest {
 	}
 
 	@Test
-	public void testIssueLicenseString() throws Exception {
-		byte[] licenseByte = LicenseMachine.issue(license, publicKeyString);
-		logger.info(KeyUtil.toStringByBase64(licenseByte));
-	}
-
-	@Test
 	public void testVerifyStringString() throws Exception {
-		Assert.assertTrue(LicenseMachine.verify(licensePath, licensePath));
+		Assert.assertTrue(LicenseMachine.verify(licensePath, privateKeyPath));
+	}
+	
+	@Test
+	public void testIssueLicenseString() throws Exception {
+		byte[] licenseByte = LicenseMachine.issue(license, publicKey);
+		logger.info(KeyUtil.toStringByBase64(licenseByte));
 	}
 
 	@Test
 	public void testVerifyByteArrayString() throws Exception {
 		Assert.assertTrue(
-				LicenseMachine.verify(KeyUtil.toByteByBase64(licenseByteByPublicKeyString), privateKeyString));
+				LicenseMachine.verify(KeyUtil.toByteByBase64(licenseByteByPublicKey), privateKey));
 	}
 
 	@Test
@@ -66,22 +80,21 @@ public class LicenseMachineTest {
 		FileUtil.makeFile(licensePath, licenseByte);
 		logger.info(KeyUtil.toStringByBase64(licenseByte));
 	}
-
-	@Test
-	public void testIssueByPrivateLicenseString() throws Exception {
-		byte[] licenseByte = LicenseMachine.issueByPrivate(license, privateKeyString);
-		logger.info(KeyUtil.toStringByBase64(licenseByte));
-	}
-
+	
 	@Test
 	public void testVerifyByPublicStringString() throws Exception {
 		Assert.assertTrue(LicenseMachine.verifyByPublic(licensePath, publicKeyPath));
 	}
 
 	@Test
+	public void testIssueByPrivateLicenseString() throws Exception {
+		byte[] licenseByte = LicenseMachine.issueByPrivate(license, privateKey);
+		logger.info(KeyUtil.toStringByBase64(licenseByte));
+	}
+
+	@Test
 	public void testVerifyByPublicByteArrayString() throws Exception {
-		Assert.assertTrue(
-				LicenseMachine.verifyByPublic(KeyUtil.toByteByBase64(licenseByteByPrivateKeyString), publicKeyString));
+		Assert.assertTrue(LicenseMachine.verifyByPublic(KeyUtil.toByteByBase64(licenseByteByPrivateKey), publicKey));
 	}
 
 }

@@ -10,12 +10,19 @@ import org.junit.Test;
 import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.KeyUtil;
 
+/**
+*
+* 선행 작업 
+* - licensePath 변수에 license를 저장할 경로를 저장한다.
+* - data에는 CipherUtilTest에서 encrypt로 생성한 값을 저장한다.
+*
+*/
 public class FileUtilTest {
 
 	private static Log logger = LogFactory.getLog(FileUtilTest.class);
 
 	private String licensePath = "D:\\eclipse_workspace\\license-machine\\file\\license_test";
-	private String data = "V4kOjZnlQpmJ4StdjQCXOXHwPuCC4DHxOlFjucody2nXj5g0M52PHUJMnRotY1rYcN99SdiCooLCa5qOIA6PWfSQ3oeUB9GdKt4TS/8qyLiEdzCaM0IXSrn37gd7bRXbf87HZrRqV8C07Fnnf7HgMhrIDP2g1IvUGyz81tODZ5wYFk4ujMs6JLphsZErTiKZ0iJagrximkPNdBvJee0ojMcYUO8Jz4Hc0QYgvIPqR4seChXaoAWArtcm3QRuZcxqef/X+DZFR7Ed4lWcmv9Lqpcq2tKLYEhkrNrqAdM/GwwURlozwKYpHMakptjUaZsyfsbqtEARHy9JzgkqNH3rHA==";
+	private String data = "L/EWPezFfnX+Q/IR5Cs4CA/iVj8h5WP+aPuZTYK5tF8tAT296uyKbc6BpF+xV61bLzybav/u3OnnqofJcDsg3UgTWCkSCfFdBgMjwGkGlSjJNK/IZD2uO+vwBupC1IcrCSjG3a8/22vWTTNrwi7OhkOILp7ATNt0TJhPjQsOtrA=";
 
 	@Test
 	public void testMakeFile() throws NullPointerException, IOException {

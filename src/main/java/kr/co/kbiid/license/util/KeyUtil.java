@@ -55,6 +55,11 @@ public class KeyUtil {
 		return keyFactory.generatePrivate(spec);
 	}
 
+	/**
+	 * 
+	 * Base64로 인코딩된 문자열로 되어 있는 개인키를 PrivateKey 객체로 만들어서 return하는 메서드
+	 * 
+	 */
 	public static PrivateKey getPrivateKeyByString(String privateKeyString)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
@@ -91,6 +96,11 @@ public class KeyUtil {
 		return keyFactory.generatePublic(keySpec);
 	}
 
+	/**
+	 * 
+	 * Base64로 인코딩된 문자열로 되어 있는 공개키를 PublicKey 객체로 만들어서 return하는 메서드
+	 * 
+	 */
 	public static PublicKey getPublicKeyByString(String publicKeyString)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		logger.info("getPublicKeyByHexString..");

@@ -11,6 +11,20 @@ import org.junit.Test;
 import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.HostInfoUtil;
 
+/**
+ * java keytool로 만든 .jks파일로부터 추출된 키를 이용하여 암/복호화하는 테스트 케이스
+ *
+ * 선행 작업 
+ * 1. javakeytool과 openssl로 생성한 publickey,privatekey의 경로를 확인하여 publicKeyPath,privateKeyPath변수에 저장한다.
+ * 2. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
+ * 3. 라이선스가 유효하지 않은 경우를 테스트 하기 위하여 license_differentDate, license_differentMacAddress, license_differentHost를 각각 이름에 맞게 license의 내용과 다르게 설정하여 객체를 생성한다.
+ *
+ * 사용법
+ * - 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다.
+ * - 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다.
+ * - license_modulated,license_over_length 같은 경우 정상적으로 생성된 license파일을 복사하여 이름을 수정하여 생성한 후 내용을 직접 수정한다.
+ *
+ */
 public class Cipher_JavaKeyTool_Test {
 
 	private static Log logger = LogFactory.getLog(Cipher_JavaKeyTool_Test.class);
