@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
-import kr.co.kbiid.license.bouncycastle.BouncyCastle;
+import kr.co.kbiid.license.util.BouncyCastleUtil;
 import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.HostInfoUtil;
 import kr.co.kbiid.license.util.KeyUtil;
@@ -61,7 +61,7 @@ public class BouncyCastleTest {
 
 	@Test
 	public void genKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException {
-		KeyPair keyPair = BouncyCastle.genKeyPair();
+		KeyPair keyPair = BouncyCastleUtil.genKeyPair();
 
 		logger.info("publicKey : " + KeyUtil.toStringByBase64(keyPair.getPublic().getEncoded()));
 		logger.info("privateKey : " + KeyUtil.toStringByBase64(keyPair.getPrivate().getEncoded()));
@@ -69,7 +69,7 @@ public class BouncyCastleTest {
 	
 	@Test
 	public void writePemFile() throws NoSuchAlgorithmException, NoSuchProviderException, FileNotFoundException, IOException {
-		KeyPair keyPair = BouncyCastle.genKeyPair();
+		KeyPair keyPair = BouncyCastleUtil.genKeyPair();
 		
 		RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) keyPair.getPrivate();
 		RSAPublicKey rsaPublicKey = (RSAPublicKey) keyPair.getPublic();
@@ -77,8 +77,8 @@ public class BouncyCastleTest {
 		logger.info("publicKey : " + KeyUtil.toStringByBase64(rsaPrivateKey.getEncoded()));
 		logger.info("privateKey : " + KeyUtil.toStringByBase64(rsaPublicKey.getEncoded()));
 		
-		BouncyCastle.writePemFile(rsaPrivateKey, "RSA PRIVATE KEY", privateKeyPath);
-		BouncyCastle.writePemFile(rsaPublicKey, "RSA PUBLIC KEY", publicKeyPath);
+		BouncyCastleUtil.writePemFile(rsaPrivateKey, "RSA PRIVATE KEY", privateKeyPath);
+		BouncyCastleUtil.writePemFile(rsaPublicKey, "RSA PUBLIC KEY", publicKeyPath);
 	}
 
 	@Test
