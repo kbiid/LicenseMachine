@@ -11,11 +11,9 @@ import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.KeyUtil;
 
 /*
-*
-* 선행 작업 
-* - licensePath 변수에 license를 저장할 경로를 저장한다.
-* - data에는 CipherUtilTest에서 encrypt로 생성한 값을 저장한다.
-*
+선행 작업 
+- licensePath 변수에 license를 저장할 경로를 저장한다.
+- data에는 CipherUtilTest에서 encrypt로 생성한 값을 저장한다.
 */
 public class FileUtilTest {
 

@@ -14,18 +14,18 @@ import kr.co.kbiid.license.util.HostInfoUtil;
 import kr.co.kbiid.license.util.KeyUtil;
 
 /*
- * 선행 작업
- * 1. keyUtilTest.java에서 genRSAKeyPair로 publicKey와 privateKey를 생성한 후 값을 확인하여 아래의 publicKey,privateKey 변수에 값을 저장한다.
- * 2. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
- * 3. publicKeyPath, privateKeyPath는 키를 생성하여 키가 있는 경로를 저장한다.
- * 4. licensePath는 라이선스를 저장할 위치를 저장한다.
- *
- * 사용법
- * - 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다.
- * - 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다.
- * - licenseByteByPublicKey,licenseByteByPrivateKey의 변수값은 testIssueLicenseString,testIssueByPrivateLicenseFile에서 확인할 수 있다.
- * - license_modulated,license_over_length 같은 경우 정상적으로 생성된 license파일을 복사하여 이름을 수정하여 생성한 후 내용을 직접 수정한다.
- */
+선행 작업
+1. keyUtilTest.java에서 genRSAKeyPair로 publicKey와 privateKey를 생성한 후 값을 확인하여 아래의 publicKey,privateKey 변수에 값을 저장한다.
+2. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
+3. publicKeyPath, privateKeyPath는 키를 생성하여 키가 있는 경로를 저장한다.
+4. licensePath는 라이선스를 저장할 위치를 저장한다.
+
+사용법
+- 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다.
+- 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다.
+- licenseByteByPublicKey,licenseByteByPrivateKey의 변수값은 testIssueLicenseString,testIssueByPrivateLicenseFile에서 확인할 수 있다.
+- license_modulated,license_over_length 같은 경우 정상적으로 생성된 license파일을 복사하여 이름을 수정하여 생성한 후 내용을 직접 수정한다.
+*/
 public class LicenseMachineTest {
 
 	private static Log logger = LogFactory.getLog(LicenseMachineTest.class);

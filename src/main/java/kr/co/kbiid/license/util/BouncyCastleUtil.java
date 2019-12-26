@@ -45,9 +45,9 @@ public class BouncyCastleUtil {
 }
 
 /**
- * @author kbiid
- *
  * PEM파일에 암호화된 정보를 담고 파일을 생성하기 위한 클래스
+ * 
+ * @author kbiid
  */
 class Pem {
 

@@ -4,9 +4,9 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 /**
+ * HostInfoUtil의 getLocalMacAddresses메서드에서 사용되는 클래스
+ *         
  * @author Kim Ki Ju <kbiid@torpedo.co.kr>
- *
- *         HostInfoUtil의 getLocalMacAddresses메서드에서 사용되는 클래스
  */
 class IterableEnumeration<T> implements Iterable<T> {
 	private final Enumeration<T> enumeration;

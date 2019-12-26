@@ -21,19 +21,18 @@ import kr.co.kbiid.license.util.KeyUtil;
 
 
 /*
-* BouncyCastle을 이용하여 키를 생성한 후 암/복호화하는 테스트 케이스
-* 
-* 선행 작업 
-* 1. genKeyPair로 publicKey와 privateKey를 생성한 후 값을 확인하여 아래의 publicKey,privateKey 변수에 값을 저장한다. 
-* 2. writePemFile을 테스트하기 위하여 publickey와 privatekey를 저장할 경로를 publicKeyPath,privateKeyPath에 저장한다. 
-* 3. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다. 
-* 4. 라이선스가 유효하지 않은 경우를 테스트 하기 위하여 license_differentDate, license_differentMacAddress, license_differentHost를 각각 이름에 맞게 license의 내용과 다르게 설정하여 객체를 생성한다.
-*
-* 사용법 
-* - 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다. 
-* - 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다. 
-* - license_modulated,license_over_length 같은 경우 정상적으로 생성된 license파일을 복사하여 이름을 수정하여 생성한 후 내용을 직접 수정한다. 
-* 
+BouncyCastle을 이용하여 키를 생성한 후 암/복호화하는 테스트 케이스
+ 
+선행 작업 
+1. genKeyPair로 publicKey와 privateKey를 생성한 후 값을 확인하여 아래의 publicKey,privateKey 변수에 값을 저장한다. 
+2. writePemFile을 테스트하기 위하여 publickey와 privatekey를 저장할 경로를 publicKeyPath,privateKeyPath에 저장한다. 
+3. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다. 
+4. 라이선스가 유효하지 않은 경우를 테스트 하기 위하여 license_differentDate, license_differentMacAddress, license_differentHost를 각각 이름에 맞게 license의 내용과 다르게 설정하여 객체를 생성한다.
+
+사용법 
+- 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다. 
+- 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다. 
+- license_modulated,license_over_length 같은 경우 정상적으로 생성된 license파일을 복사하여 이름을 수정하여 생성한 후 내용을 직접 수정한다. 
 * */
 public class BouncyCastleTest {
 

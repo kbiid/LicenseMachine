@@ -24,7 +24,10 @@ public class KeyUtil {
 
 	private static Log logger = LogFactory.getLog(KeyUtil.class);
 
-	/** 1024비트 RSA 키쌍을 생성 */
+	/**
+	 * @return KeyPair
+	 * @throws NoSuchAlgorithmException
+	 */
 	public static KeyPair genRSAKeyPair() throws NoSuchAlgorithmException {
 		logger.info("genRSAKeyPair start..");
 
@@ -42,6 +45,9 @@ public class KeyUtil {
 	 * 
 	 * @param privateKeyFilePath 개인키가 저장되어 있는 경로
 	 * @return PrivateKey
+	 * @throws IOException
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
 	 */
 	public static PrivateKey getPrivateKeyByFile(String privateKeyFilePath)
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -64,6 +70,8 @@ public class KeyUtil {
 	 * 
 	 * @param keyBytes 개인키의 byte 배열
 	 * @return PrivateKey
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
 	 */
 	private static PrivateKey generatePrivateKey(byte[] keyBytes)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -73,7 +81,14 @@ public class KeyUtil {
 		return keyFactory.generatePrivate(spec);
 	}
 
-	/** Base64로 인코딩된 문자열로 되어 있는 개인키를 PrivateKey 객체로 만들어서 return하는 메서드 */
+	/**
+	 * Base64로 인코딩된 문자열로 되어 있는 개인키를 PrivateKey 객체로 만들어서 return하는 메서드
+	 * 
+	 * @param privateKeyString Base64로 인코딩된 개인키 문자열
+	 * @return PrivateKey
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
 	public static PrivateKey getPrivateKeyByString(String privateKeyString)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
@@ -81,7 +96,12 @@ public class KeyUtil {
 		return generatePrivateKey(toByteByBase64(privateKeyString));
 	}
 
-	/** 바이트 배열을 Base64로 인코딩된 문자열로 변환하는 메서드 */
+	/**
+	 * 바이트 배열을 Base64로 인코딩된 문자열로 변환하는 메서드
+	 * 
+	 * @param encrypted 암호화한 결과로 만들어진 바이트 배열
+	 * @return String
+	 */
 	public static String toStringByBase64(byte[] encrypted) {
 		Encoder encoder = Base64.getEncoder();
 		return encoder.encodeToString(encrypted);
@@ -98,6 +118,9 @@ public class KeyUtil {
 	 * 
 	 * @param publicKeyFilePath
 	 * @return PublicKey
+	 * @throws IOException
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
 	 */
 	public static PublicKey getPublicKeyByFile(String publicKeyFilePath)
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -120,7 +143,14 @@ public class KeyUtil {
 		return keyFactory.generatePublic(keySpec);
 	}
 
-	/** Base64로 인코딩된 문자열로 되어 있는 공개키를 PublicKey 객체로 만들어서 return하는 메서드 */
+	/**
+	 * Base64로 인코딩된 문자열로 되어 있는 공개키를 PublicKey 객체로 만들어서 return하는 메서드
+	 * 
+	 * @param publicKeyString Base64로 인코딩된 공개키 문자열
+	 * @return PublicKey
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
 	public static PublicKey getPublicKeyByString(String publicKeyString)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		logger.info("getPublicKeyByHexString..");
