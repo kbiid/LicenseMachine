@@ -18,6 +18,8 @@ public class HostInfoUtil {
 	public static String getHostName() {
 
 		logger.info("getHostName..");
+		
+		// 시스템 환경변수 'HOSTNAME' 가져오기
 		String hostName = System.getenv("HOSTNAME");
 		if (hostName != null) {
 			return hostName;
@@ -25,7 +27,10 @@ public class HostInfoUtil {
 
 		String lineStr = "";
 		try {
+			// hostname 명령어 실행
 			Process process = Runtime.getRuntime().exec("hostname");
+			
+			// hostname 결과 읽어들이는 과정
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			while ((lineStr = bufferedReader.readLine()) != null) {
 				hostName = lineStr;
@@ -42,7 +47,9 @@ public class HostInfoUtil {
 		logger.info("getLocalMacAddresses");
 		List<String> macAddressList = new ArrayList<>();
 
+		// 시스템 내 존재하는 모든 네트워크 디바이스의 리스트를 조회하여 물리주소를 가져오는 과정
 		for (NetworkInterface network : IterableEnumeration.make(NetworkInterface.getNetworkInterfaces())) {
+			// 물리주소 가져옴
 			byte[] mac = network.getHardwareAddress();
 			if (mac != null) {
 				StringBuilder sb = new StringBuilder();

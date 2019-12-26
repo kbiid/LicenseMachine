@@ -12,14 +12,14 @@ import org.junit.Test;
 import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.HostInfoUtil;
 
-/**
+/*
  * 코드 상에서 키를 관리하여 암/복호화하는 테스트 케이스
- *
- * 선행 작업 
+ * 
+ * 선행 작업
  * 1. keyUtilTest.java에서 genRSAKeyPair로 publicKey와 privateKey를 생성한 후 값을 확인하여 아래의 publicKey,privateKey 변수에 값을 저장한다.
  * 2. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
  * 3. 라이선스가 유효하지 않은 경우를 테스트 하기 위하여 license_differentDate, license_differentMacAddress, license_differentHost를 각각 이름에 맞게 license의 내용과 다르게 설정하여 객체를 생성한다.
- *
+ * 
  * 사용법
  * - 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다.
  * - 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다.

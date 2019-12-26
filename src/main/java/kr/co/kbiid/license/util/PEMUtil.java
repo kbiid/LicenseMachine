@@ -16,8 +16,14 @@ import java.security.spec.X509EncodedKeySpec;
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemReader;
 
+/**
+ * pem형식의 파일을 읽고 키를 얻기 위한 클래스
+ * 
+ * @author kbiid
+ */
 public class PEMUtil {
 
+	/** pem 파일에서 내용을 읽어오는 메서드 */
 	private static byte[] parsePEMFile(File pemFile) throws IOException {
 		if (!pemFile.isFile() || !pemFile.exists()) {
 			throw new FileNotFoundException(String.format("경로(%s)에 파일이 존재하지 않습니다.", pemFile.getAbsolutePath()));

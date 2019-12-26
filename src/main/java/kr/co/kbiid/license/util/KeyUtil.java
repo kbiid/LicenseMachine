@@ -24,42 +24,56 @@ public class KeyUtil {
 
 	private static Log logger = LogFactory.getLog(KeyUtil.class);
 
-	/**
-	 * 1024비트 RSA 키쌍을 생성
-	 */
+	/** 1024비트 RSA 키쌍을 생성 */
 	public static KeyPair genRSAKeyPair() throws NoSuchAlgorithmException {
 		logger.info("genRSAKeyPair start..");
-		SecureRandom secureRandom = new SecureRandom();
-		KeyPairGenerator gen = KeyPairGenerator.getInstance("RSA");
-		gen.initialize(1024, secureRandom);
+
+		SecureRandom secureRandom = new SecureRandom(); // 난수 생성을 위한 클래스
+		
+		KeyPairGenerator gen = KeyPairGenerator.getInstance("RSA"); // RSA 알고리즘 KeyPairGenerator 객체 생성
+		gen.initialize(1024, secureRandom); // 임의의 1024비트 사이즈로 KeyPairGenerator 객체 초기화
 
 		KeyPair keyPair = gen.genKeyPair();
 		return keyPair;
 	}
 
-	public static PrivateKey getPrivateKeyByFile(String fileFullPath)
+	/**
+	 * 개인키가 들어있는 파일에서 개인키를 가져오는 메서드
+	 * 
+	 * @param privateKeyFilePath 개인키가 저장되어 있는 경로
+	 * @return PrivateKey
+	 */
+	public static PrivateKey getPrivateKeyByFile(String privateKeyFilePath)
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 
 		logger.info("getPrivateKey..");
-		if (Paths.get(fileFullPath).getFileName().toString().contains(".pem")) {
-			return PEMUtil.readPrivateKeyFromFile(fileFullPath, "RSA");
+
+		String fileName = Paths.get(privateKeyFilePath).getFileName().toString();
+		
+		// pem 형식의 파일인지 확인하기 위한 과정
+		if (fileName.contains(".pem")) {
+			return PEMUtil.readPrivateKeyFromFile(privateKeyFilePath, "RSA");
 		}
-		byte[] keyBytes = Files.readAllBytes(Paths.get(fileFullPath));
+		
+		byte[] keyBytes = Files.readAllBytes(Paths.get(privateKeyFilePath)); // pem 형식이 아닐 경우
 		return generatePrivateKey(keyBytes);
 	}
 
+	/**
+	 * 바이트 배열 형태인 개인키를 PrivateKey 객체로 만드는 메서드
+	 * 
+	 * @param keyBytes 개인키의 byte 배열
+	 * @return PrivateKey
+	 */
 	private static PrivateKey generatePrivateKey(byte[] keyBytes)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
+		
 		PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
 		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 		return keyFactory.generatePrivate(spec);
 	}
 
-	/**
-	 * 
-	 * Base64로 인코딩된 문자열로 되어 있는 개인키를 PrivateKey 객체로 만들어서 return하는 메서드
-	 * 
-	 */
+	/** Base64로 인코딩된 문자열로 되어 있는 개인키를 PrivateKey 객체로 만들어서 return하는 메서드 */
 	public static PrivateKey getPrivateKeyByString(String privateKeyString)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
@@ -67,24 +81,34 @@ public class KeyUtil {
 		return generatePrivateKey(toByteByBase64(privateKeyString));
 	}
 
+	/** 바이트 배열을 Base64로 인코딩된 문자열로 변환하는 메서드 */
 	public static String toStringByBase64(byte[] encrypted) {
 		Encoder encoder = Base64.getEncoder();
 		return encoder.encodeToString(encrypted);
 	}
 
+	/** Base64로 인코딩된 문자열을 바이트 배열로 변환하는 메서드 */
 	public static byte[] toByteByBase64(String encrypted) {
 		Decoder decoder = Base64.getDecoder();
 		return decoder.decode(encrypted);
 	}
 
-	public static PublicKey getPublicKeyByFile(String fileFullPath)
+	/**
+	 * 공개키가 들어있는 파일에서 공개키를 가져오는 메서드
+	 * 
+	 * @param publicKeyFilePath
+	 * @return PublicKey
+	 */
+	public static PublicKey getPublicKeyByFile(String publicKeyFilePath)
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 
 		logger.info("getPublicKey..");
-		if (Paths.get(fileFullPath).getFileName().toString().contains(".pem")) {
-			return PEMUtil.readPublicKeyFromFile(fileFullPath, "RSA");
+		
+		String fileName = Paths.get(publicKeyFilePath).getFileName().toString();
+		if (fileName.contains(".pem")) {
+			return PEMUtil.readPublicKeyFromFile(publicKeyFilePath, "RSA");
 		}
-		byte[] keyBytes = Files.readAllBytes(Paths.get(fileFullPath));
+		byte[] keyBytes = Files.readAllBytes(Paths.get(publicKeyFilePath));
 		return generatePublicKey(keyBytes);
 	}
 
@@ -96,11 +120,7 @@ public class KeyUtil {
 		return keyFactory.generatePublic(keySpec);
 	}
 
-	/**
-	 * 
-	 * Base64로 인코딩된 문자열로 되어 있는 공개키를 PublicKey 객체로 만들어서 return하는 메서드
-	 * 
-	 */
+	/** Base64로 인코딩된 문자열로 되어 있는 공개키를 PublicKey 객체로 만들어서 return하는 메서드 */
 	public static PublicKey getPublicKeyByString(String publicKeyString)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		logger.info("getPublicKeyByHexString..");

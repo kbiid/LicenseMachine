@@ -1,6 +1,6 @@
-#License Machine
+# License Machine
 
-### 정의
+## 정의
  * 라이선스 정보(HostName, Mac Address, 유효 기간)를 암/복호화, 파일 생성 및 읽기가 가능한 API
 
 ## 사용법

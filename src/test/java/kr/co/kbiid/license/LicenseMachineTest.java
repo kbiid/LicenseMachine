@@ -13,9 +13,8 @@ import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.HostInfoUtil;
 import kr.co.kbiid.license.util.KeyUtil;
 
-/**
- *
- * 선행 작업 
+/*
+ * 선행 작업
  * 1. keyUtilTest.java에서 genRSAKeyPair로 publicKey와 privateKey를 생성한 후 값을 확인하여 아래의 publicKey,privateKey 변수에 값을 저장한다.
  * 2. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
  * 3. publicKeyPath, privateKeyPath는 키를 생성하여 키가 있는 경로를 저장한다.

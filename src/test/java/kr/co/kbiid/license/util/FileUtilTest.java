@@ -10,7 +10,7 @@ import org.junit.Test;
 import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.KeyUtil;
 
-/**
+/*
 *
 * 선행 작업 
 * - licensePath 변수에 license를 저장할 경로를 저장한다.

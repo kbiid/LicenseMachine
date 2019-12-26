@@ -11,10 +11,10 @@ import org.junit.Test;
 import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.HostInfoUtil;
 
-/**
+/*
  * openssl을 이용하여 생성된 키를 사용하여 암/복호화하는 테스트 케이스
  *
- * 선행 작업 
+ * 선행 작업
  * 1. openssl이 설치되어있는지 확인한 후, 설치되어 있지 않다면 설치한다.
  * 2. openssl로 생성한 publickey,privatekey의 경로를 확인하여 publicKeyPath,privateKeyPath변수에 저장한다.
  * 3. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
@@ -24,7 +24,6 @@ import kr.co.kbiid.license.util.HostInfoUtil;
  * - 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다.
  * - 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다.
  * - license_modulated,license_over_length 같은 경우 정상적으로 생성된 license파일을 복사하여 이름을 수정하여 생성한 후 내용을 직접 수정한다.
- *
  */
 public class Cipher_Openssl_Test {
 

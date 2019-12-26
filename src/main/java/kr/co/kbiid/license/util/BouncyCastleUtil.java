@@ -25,6 +25,7 @@ public class BouncyCastleUtil {
 
 	public static KeyPair genKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException {
 
+		// bouncycastle provider 등록
 		Security.addProvider(new BouncyCastleProvider());
 
 		KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA", "BC");
@@ -43,6 +44,11 @@ public class BouncyCastleUtil {
 	}
 }
 
+/**
+ * @author kbiid
+ *
+ * PEM파일에 암호화된 정보를 담고 파일을 생성하기 위한 클래스
+ */
 class Pem {
 
 	private PemObject pemObject;

@@ -28,9 +28,14 @@ public class CipherUtil {
 			NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
 
 		logger.info("encryptRSA start..");
+		
+		// RSA Cipher 객체 생성
 		Cipher cipher = Cipher.getInstance("RSA");
 
+		// 암호화 Cipher 초기화
 		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+		
+		// 암호화 완료
 		byte[] bytePlain = cipher.doFinal(plainText.getBytes());
 
 		return bytePlain;
@@ -65,12 +70,17 @@ public class CipherUtil {
 			IllegalBlockSizeException, UnsupportedEncodingException {
 
 		logger.info("decryptRSA start..");
+		
+		// RSA Cipher 객체 생성
 		Cipher cipher = Cipher.getInstance("RSA");
 
+		// 복호화 Cipher 초기화
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
+		
+		// 복호화 완료
 		byte[] bytePlain = cipher.doFinal(encrypted);
+		
 		String decrypted = new String(bytePlain, "utf-8");
-
 		return decrypted;
 	}
 
