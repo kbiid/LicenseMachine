@@ -8,3 +8,8 @@ build
 /temp/
 
 
+/.classpath
+/.project
+/settings.gradle
+/gradlew
+/gradlew.bat
