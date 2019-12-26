@@ -1,7 +1,7 @@
 # License Machine
 
 ## 정의
- * 라이선스 정보(HostName, Mac Address, 유효 기간)를 암/복호화, 파일 생성 및 읽기가 가능한 API
+* 라이선스 정보(HostName, Mac Address, 유효 기간)를 암/복호화, 파일 생성 및 읽기가 가능한 API
 
 ## 사용법
 * 자세한 사용법은 테스트 케이스의 코드를 참고한다.
@@ -10,51 +10,51 @@
 #### issue
 * issue(License, PublicKeyFile)
 
-```
-	License license = new License("호스트", "Z0-H1-12-B7-9V-10", LocalDate.now().plusYears(1));
-	File file = new File(publicKeyPath); 
-	LicenseMachine.issue(license, file);
+```java
+License license = new License("호스트", "Z0-H1-12-B7-9V-10", LocalDate.now().plusYears(1));
+File file = new File(publicKeyPath); 
+LicenseMachine.issue(license, file);
 ```
 * issue(License, publicKeyString)
 
-```
-	License license = new License("호스트", "Z0-H1-12-B7-9V-10", LocalDate.now().plusYears(1));
-	LicenseMachine.issue(license, publicKeyString);
+```java
+License license = new License("호스트", "Z0-H1-12-B7-9V-10", LocalDate.now().plusYears(1));
+LicenseMachine.issue(license, publicKeyString);
 ```
 * issueByPrivate(License, privateKeyFile)
 
-```
-	License license = new License("호스트", "Z0-H1-12-B7-9V-10", LocalDate.now().plusYears(1));
-	File file = new File(privateKeyFile); 
-	LicenseMachine.issue(license, file);
+```java
+License license = new License("호스트", "Z0-H1-12-B7-9V-10", LocalDate.now().plusYears(1));
+File file = new File(privateKeyFile); 
+LicenseMachine.issue(license, file);
 ```
 * issue(License, privateKeyString)
 
-```
-	License license = new License("호스트", "Z0-H1-12-B7-9V-10", LocalDate.now().plusYears(1));
-	LicenseMachine.issue(license, privateKeyString);
+```java
+License license = new License("호스트", "Z0-H1-12-B7-9V-10", LocalDate.now().plusYears(1));
+LicenseMachine.issue(license, privateKeyString);
 ```
 
 #### verify
 * verify(LicensePath, privateKeyPath)
 
-```
-	LicenseMachine.verify(licensePath, privateKeyPath)
+```java
+LicenseMachine.verify(licensePath, privateKeyPath)
 ```
 * verify(encrypted, privateKeyString)
 
-```
-	LicenseMachine.verify(KeyUtil.toByteByBase64(encrypted), privateKey)
+```java
+LicenseMachine.verify(KeyUtil.toByteByBase64(encrypted), privateKey)
 ```
 * verifyByPublic(LicensePath, publicKeyPath)
 
-```
-	LicenseMachine.verifyByPublic(licensePath, publicKeyPath)
+```java
+LicenseMachine.verifyByPublic(licensePath, publicKeyPath)
 ```
 * verifyByPublic(encrypted, publicKeyString)
 
-```
-	LicenseMachine.verifyByPublic(KeyUtil.toByteByBase64(encrypted), publicKeyString)
+```java
+LicenseMachine.verifyByPublic(KeyUtil.toByteByBase64(encrypted), publicKeyString)
 ```
 
 ## TroubleShooting
