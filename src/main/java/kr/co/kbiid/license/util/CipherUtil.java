@@ -14,6 +14,13 @@ import javax.crypto.NoSuchPaddingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * 이 클래스는 암호화를 수행하기 위한 기능이 들어있다.
+ * 공개키 암호화, 개인키 복호화. 개인키 암호화, 공개키 복호화가 가능한 메서드가 구현되어 있다.
+ * 
+ * @author user
+ *
+ */
 public class CipherUtil {
 
 	private static Log logger = LogFactory.getLog(CipherUtil.class);
@@ -23,6 +30,7 @@ public class CipherUtil {
 	 * 
 	 * @param plainText 암호화할 평문
 	 * @param publicKey 공개키
+	 * @return byte[] 암호화한 결과값
 	 * @throws NoSuchPaddingException
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeyException
@@ -51,6 +59,7 @@ public class CipherUtil {
 	 * 
 	 * @param plainText  암호화할 평문
 	 * @param privateKey 개인키
+	 * @return byte[] 암호화한 결과값
 	 * @throws NoSuchPaddingException
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeyException
@@ -74,6 +83,7 @@ public class CipherUtil {
 	 * 
 	 * @param encrypted  암호화된 이진데이터를 base64 인코딩한 문자열
 	 * @param privateKey 복호화를 위한 개인키
+	 * @return byte[] 암호화한 결과값
 	 * @throws NoSuchPaddingException
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeyException
@@ -105,6 +115,7 @@ public class CipherUtil {
 	 * 
 	 * @param encrypted 암호화된 이진데이터를 base64 인코딩한 문자열
 	 * @param publicKey 복호화를 위한 공개키
+	 * @return byte[] 암호화한 결과값
 	 * @throws NoSuchPaddingException
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeyException

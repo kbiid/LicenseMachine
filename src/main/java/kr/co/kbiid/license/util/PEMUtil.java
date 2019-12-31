@@ -17,7 +17,7 @@ import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemReader;
 
 /**
- * pem형식의 파일을 읽고 키를 얻는다.
+ * 이 클래스는 pem형식의 파일을 읽고 키를 얻기 위하여 사용한다.
  * 
  * @author kbiid
  */

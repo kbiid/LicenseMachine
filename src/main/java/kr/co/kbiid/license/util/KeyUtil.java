@@ -25,6 +25,8 @@ public class KeyUtil {
 	private static Log logger = LogFactory.getLog(KeyUtil.class);
 
 	/**
+	 * KeyPair를 생성한다.
+	 * 
 	 * @return KeyPair
 	 * @throws NoSuchAlgorithmException
 	 */
@@ -56,12 +58,12 @@ public class KeyUtil {
 
 		String fileName = Paths.get(privateKeyFilePath).getFileName().toString();
 		
-		// pem 형식의 파일인지 확인하기 위한 과정
+		// PEM 파일일 경우
 		if (fileName.contains(".pem")) {
 			return PEMUtil.readPrivateKeyFromFile(privateKeyFilePath, "RSA");
 		}
 		
-		byte[] keyBytes = Files.readAllBytes(Paths.get(privateKeyFilePath)); // pem 형식이 아닐 경우
+		byte[] keyBytes = Files.readAllBytes(Paths.get(privateKeyFilePath)); // PEM 파일이 아닐 경우
 		return generatePrivateKey(keyBytes);
 	}
 
