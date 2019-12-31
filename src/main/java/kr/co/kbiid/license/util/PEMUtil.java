@@ -17,13 +17,19 @@ import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemReader;
 
 /**
- * pem형식의 파일을 읽고 키를 얻기 위한 클래스
+ * pem형식의 파일을 읽고 키를 얻는다.
  * 
  * @author kbiid
  */
 public class PEMUtil {
 
-	/** pem 파일에서 내용을 읽어오는 메서드 */
+	/**
+	 * PEM 파일의 내용을 읽어 바이트 배열로 반환한다.
+	 * 
+	 * @param pemFile PEM 파일
+	 * @return byte[] 바이트 배열로 변환한 PEM 파일
+	 * @throws IOException
+	 */
 	private static byte[] parsePEMFile(File pemFile) throws IOException {
 		if (!pemFile.isFile() || !pemFile.exists()) {
 			throw new FileNotFoundException(String.format("경로(%s)에 파일이 존재하지 않습니다.", pemFile.getAbsolutePath()));
@@ -35,6 +41,15 @@ public class PEMUtil {
 		return content;
 	}
 
+	/**
+	 * 바이트 배열 형태의 공캐키에서 공개키를 얻는다.
+	 * 
+	 * @param keyBytes  공개키의 바이트 배열 형태
+	 * @param algorithm 사용할 암호화 알고리즘
+	 * @return PublicKey 공개키
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
 	private static PublicKey getPublicKey(byte[] keyBytes, String algorithm)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
@@ -43,6 +58,15 @@ public class PEMUtil {
 		return kf.generatePublic(keySpec);
 	}
 
+	/**
+	 * 바이트 배열 형태의 개인키에서 개인키를 얻는다.
+	 * 
+	 * @param keyBytes  개인키의 바이트 배열 형태
+	 * @param algorithm 사용할 암호화 알고리즘
+	 * @return PrivateKey 개인키
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
 	private static PrivateKey getPrivateKey(byte[] keyBytes, String algorithm)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
@@ -51,18 +75,38 @@ public class PEMUtil {
 		return kf.generatePrivate(keySpec);
 	}
 
-	public static PublicKey readPublicKeyFromFile(String filePath, String algorithm)
+	/**
+	 * PEM 파일에서 공개키를 얻는다.
+	 * 
+	 * @param pemFilePath 공개키가 들어있는 PEM 파일
+	 * @param algorithm   사용할 암호화 알고리즘
+	 * @return PublicKey 공개키
+	 * @throws IOException
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
+	public static PublicKey readPublicKeyFromFile(String pemFilePath, String algorithm)
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-		
-		byte[] bytes = PEMUtil.parsePEMFile(new File(filePath));
+
+		byte[] bytes = PEMUtil.parsePEMFile(new File(pemFilePath));
 		return PEMUtil.getPublicKey(bytes, algorithm);
 	}
 
-	public static PrivateKey readPrivateKeyFromFile(String filePath, String algorithm)
+	/**
+	 * PEM 파일에서 개인키를 얻는다.
+	 * 
+	 * @param pemFilePath 개인키가 들어있는 PEM 파일
+	 * @param algorithm   사용할 암호화 알고리즘
+	 * @return PrivateKey 개인키
+	 * @throws IOException
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
+	public static PrivateKey readPrivateKeyFromFile(String pemFilePath, String algorithm)
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
-		
-		byte[] bytes = PEMUtil.parsePEMFile(new File(filePath));
+
+		byte[] bytes = PEMUtil.parsePEMFile(new File(pemFilePath));
 		return PEMUtil.getPrivateKey(bytes, algorithm);
 	}
-	
+
 }

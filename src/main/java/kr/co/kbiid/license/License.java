@@ -3,7 +3,7 @@ package kr.co.kbiid.license;
 import java.time.LocalDate;
 
 /**
- * 라이선스의 정보(hostname, macAddress, 유효기간)을 담는 클래스
+ * 라이선스의 정보(hostname, macAddress, 유효기간)를 담는다.
  * 
  * @author kbiid
  */

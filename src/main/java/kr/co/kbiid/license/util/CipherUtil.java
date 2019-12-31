@@ -19,7 +19,7 @@ public class CipherUtil {
 	private static Log logger = LogFactory.getLog(CipherUtil.class);
 
 	/**
-	 * Public Key로 암호화를 수행함
+	 * Public Key로 암호화를 수행한다.
 	 * 
 	 * @param plainText 암호화할 평문
 	 * @param publicKey 공개키
@@ -47,7 +47,7 @@ public class CipherUtil {
 	}
 
 	/**
-	 * Private Key로 암호화를 수행함
+	 * Private Key로 암호화를 수행한다.
 	 * 
 	 * @param plainText  암호화할 평문
 	 * @param privateKey 개인키
@@ -70,7 +70,7 @@ public class CipherUtil {
 	}
 
 	/**
-	 * Private Key로 RSA 복호화를 수행
+	 * Private Key로 RSA 복호화를 수행한다.
 	 * 
 	 * @param encrypted  암호화된 이진데이터를 base64 인코딩한 문자열
 	 * @param privateKey 복호화를 위한 개인키
@@ -101,7 +101,7 @@ public class CipherUtil {
 	}
 
 	/**
-	 * Public Key로 RSA 복호화를 수행
+	 * Public Key로 RSA 복호화를 수행한다.
 	 * 
 	 * @param encrypted 암호화된 이진데이터를 base64 인코딩한 문자열
 	 * @param publicKey 복호화를 위한 공개키

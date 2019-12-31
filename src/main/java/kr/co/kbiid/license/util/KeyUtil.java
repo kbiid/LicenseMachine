@@ -41,10 +41,10 @@ public class KeyUtil {
 	}
 
 	/**
-	 * 개인키가 들어있는 파일에서 개인키를 가져오는 메서드
+	 * 개인키가 들어있는 파일에서 개인키얻는다.
 	 * 
 	 * @param privateKeyFilePath 개인키가 저장되어 있는 경로
-	 * @return PrivateKey
+	 * @return PrivateKey 개인키
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeySpecException
@@ -66,10 +66,10 @@ public class KeyUtil {
 	}
 
 	/**
-	 * 바이트 배열 형태인 개인키를 PrivateKey 객체로 만드는 메서드
+	 * 바이트 배열 형태의 개인키에서 개인키를 얻는다.
 	 * 
 	 * @param keyBytes 개인키의 byte 배열
-	 * @return PrivateKey
+	 * @return PrivateKey 개인키
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeySpecException
 	 */
@@ -82,10 +82,10 @@ public class KeyUtil {
 	}
 
 	/**
-	 * Base64로 인코딩된 문자열로 되어 있는 개인키를 PrivateKey 객체로 만들어서 return하는 메서드
+	 * Base64로 인코딩된 개인키 문자열에서 개인키를 얻는다.
 	 * 
 	 * @param privateKeyString Base64로 인코딩된 개인키 문자열
-	 * @return PrivateKey
+	 * @return PrivateKey 개인키
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeySpecException
 	 */
@@ -97,27 +97,32 @@ public class KeyUtil {
 	}
 
 	/**
-	 * 바이트 배열을 Base64로 인코딩된 문자열로 변환하는 메서드
+	 * 바이트 배열을 Base64로 인코딩된 문자열로 변환한다.
 	 * 
 	 * @param encrypted 암호화한 결과로 만들어진 바이트 배열
-	 * @return String
+	 * @return String Base64로 인코딩된 바이트 배열
 	 */
 	public static String toStringByBase64(byte[] encrypted) {
 		Encoder encoder = Base64.getEncoder();
 		return encoder.encodeToString(encrypted);
 	}
 
-	/** Base64로 인코딩된 문자열을 바이트 배열로 변환하는 메서드 */
+	/**
+	 * Base64로 인코딩된 문자열을 바이트 배열로 변환하는 메서드 
+	 * 
+	 * @param encrypted Base64로 인코딩된 문자열
+	 * @return byte[] 바이트 배열로 디코딩된 문자열
+	 */
 	public static byte[] toByteByBase64(String encrypted) {
 		Decoder decoder = Base64.getDecoder();
 		return decoder.decode(encrypted);
 	}
 
 	/**
-	 * 공개키가 들어있는 파일에서 공개키를 가져오는 메서드
+	 * 공개키가 들어있는 파일에서 공개키를 얻는다.
 	 * 
-	 * @param publicKeyFilePath
-	 * @return PublicKey
+	 * @param publicKeyFilePath 공개키가 저장되어 있는 경로
+	 * @return PublicKey 공개키
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeySpecException
@@ -144,10 +149,10 @@ public class KeyUtil {
 	}
 
 	/**
-	 * Base64로 인코딩된 문자열로 되어 있는 공개키를 PublicKey 객체로 만들어서 return하는 메서드
+	 * Base64로 인코딩된 공개키 문자열에서 공개키를 얻는다.
 	 * 
 	 * @param publicKeyString Base64로 인코딩된 공개키 문자열
-	 * @return PublicKey
+	 * @return PublicKey 공개키
 	 * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeySpecException
 	 */

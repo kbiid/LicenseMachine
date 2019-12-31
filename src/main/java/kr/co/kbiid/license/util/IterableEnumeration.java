@@ -4,7 +4,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 /**
- * HostInfoUtil의 getLocalMacAddresses메서드에서 사용되는 클래스
+ * HostInfoUtil의 getLocalMacAddresses메서드에서 사용된다.
  *         
  * @author Kim Ki Ju <kbiid@torpedo.co.kr>
  */
