@@ -12,24 +12,25 @@ import kr.co.kbiid.license.util.FileUtil;
 import kr.co.kbiid.license.util.HostInfoUtil;
 
 /*
-java keytool로 만든 .jks파일로부터 추출된 키를 이용하여 암/복호화하는 테스트 케이스
+openssl을 이용하여 생성된 키를 사용하여 암/복호화하는 테스트 케이스
 
 선행 작업
-1. javakeytool과 openssl로 생성한 publickey,privatekey의 경로를 확인하여 publicKeyPath,privateKeyPath변수에 저장한다.
-2. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
-3. 라이선스가 유효하지 않은 경우를 테스트 하기 위하여 license_differentDate, license_differentMacAddress, license_differentHost를 각각 이름에 맞게 license의 내용과 다르게 설정하여 객체를 생성한다.
+1. openssl이 설치되어있는지 확인한 후, 설치되어 있지 않다면 설치한다.
+2. openssl로 생성한 publickey,privatekey의 경로를 확인하여 publicKeyPath,privateKeyPath변수에 저장한다.
+3. 테스트 하고자 하는 라이선스의 정보를 License객체로 생성한다.
+4. 라이선스가 유효하지 않은 경우를 테스트 하기 위하여 license_differentDate, license_differentMacAddress, license_differentHost를 각각 이름에 맞게 license의 내용과 다르게 설정하여 객체를 생성한다.
 
 사용법
 - 선행작업으로 설정된 변수들을 사용하여 테스트 코드들을 하나씩 실행시킨다.
 - 실행 결과 라이선스 파일이 정상적으로 생성이 되는지 확인한다.
 - license_modulated,license_over_length 같은 경우 정상적으로 생성된 license파일을 복사하여 이름을 수정하여 생성한 후 내용을 직접 수정한다.
 */
-public class Cipher_JavaKeyTool_Test {
+public class CipherOpensslTest {
 
-	private static Log logger = LogFactory.getLog(Cipher_JavaKeyTool_Test.class);
-	
-	private String publicKeyPath = "./file/keytool/public.pem";
-	private String privateKeyPath = "./file/keytool/private.pem";
+	private static Log logger = LogFactory.getLog(CipherOpensslTest.class);
+
+	private String publicKeyPath = "./file/openssl/public_key.der";
+	private String privateKeyPath = "./file/openssl/private_key.der";
 
 	private License license = new License(HostInfoUtil.getHostName(), "D8-C4-97-D6-5F-92",
 			LocalDate.now().plusYears(1));
@@ -39,19 +40,18 @@ public class Cipher_JavaKeyTool_Test {
 			LocalDate.now().plusYears(1));
 	private License license_differentHost = new License("kbiid", "D8-C4-97-D6-5F-92", LocalDate.now().plusYears(1));
 
-	private String licensePath = "./file/keytool/license";
-	private String differentDateLicensePath = "./file/keytool/license_different_date";
-	private String differentMacAddressLicensePath = "./file/keytool/license_different_mac";
-	private String differentHostPath = "./file/keytool/license_different_host";
+	private String licensePath = "./file/openssl/license";
+	private String differentDateLicensePath = "./file/openssl/license_different_date";
+	private String differentMacAddressLicensePath = "./file/openssl/license_different_mac";
+	private String differentHostPath = "./file/openssl/license_different_host";
 
-	private String modulatedLicensePath = "./file/keytool/license_modulated";
-	private String overLengthLicensePath = "./file/keytool/license_over_length";
+	private String modulatedLicensePath = "./file/openssl/license_modulated";
+	private String overLengthLicensePath = "./file/openssl/license_over_length";
 
 	@Test
 	public void cipher() {
 		try {
 			File file = new File(publicKeyPath);
-			
 			byte[] encrypted = LicenseMachine.issue(license, file);
 			FileUtil.makeFile(licensePath, encrypted);
 			boolean result = LicenseMachine.verify(licensePath, privateKeyPath);
@@ -62,7 +62,6 @@ public class Cipher_JavaKeyTool_Test {
 				Assert.fail("일치하지 않습니다.");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
 	}
@@ -74,7 +73,7 @@ public class Cipher_JavaKeyTool_Test {
 			if (result) {
 				logger.info("일치합니다.");
 			} else {
-				Assert.fail("유효하지 않은 라이센스입니다.");
+				Assert.fail("일치하지 않습니다.");
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -89,7 +88,7 @@ public class Cipher_JavaKeyTool_Test {
 			if (result) {
 				logger.info("일치합니다.");
 			} else {
-				Assert.fail("유효하지 않은 라이센스입니다.");
+				Assert.fail("일치하지 않습니다.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
