@@ -141,7 +141,15 @@ public class KeyUtil {
 		byte[] keyBytes = Files.readAllBytes(Paths.get(publicKeyFilePath));
 		return generatePublicKey(keyBytes);
 	}
-
+	
+	/**
+	 * 바이트 배열 형태의 공개키에서 공개키를 얻는다.
+	 * 
+	 * @param keyBytes 공개키의 byte 배열
+	 * @return PublicKey 공개키
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
+	 */
 	private static PublicKey generatePublicKey(byte[] keyBytes)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
